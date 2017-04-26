@@ -13,6 +13,7 @@ struct ExtEuclid {
 };
 
 ExtEuclid ExtendedEuclideanAlgorithm(int a, int b);
+// Calculates the gcd of the numbers and also the bezout coefficients of the numbers.
 int RecursiveEuclideanAlgorithm(int a, int b, int *s, int *t);
 
 
@@ -20,6 +21,7 @@ int main() {
     int num1, num2;
     cout << "Enter the two numbers: " << endl;
     cin >> num1 >> num2;
+
     ExtEuclid gcd = ExtendedEuclideanAlgorithm(num1, num2);
     cout << "The gcd of " << num1 << " and " << num2 << " is: " << gcd.gcd << " with bezout coefficients: " << gcd.bezout1 << " and " << gcd.bezout2 << endl;
 
@@ -29,6 +31,7 @@ int main() {
     cout << "The gcd of " << num1 << " and " << num2 << " is: " << gcd2 << " with bezout coefficients: " << t << " and " << s << endl;
 }
 
+// Naiive form of the extended euclidean algorithm.
 ExtEuclid ExtendedEuclideanAlgorithm(int a, int b) {
     int x = a;
     int y = b;
@@ -48,11 +51,13 @@ ExtEuclid ExtendedEuclideanAlgorithm(int a, int b) {
         sOld = sNew;
         tOld = tNew;
     }
-    ExtEuclid results = {x, sOldOld, tOldOld};
+    ExtEuclid results = {x, sOldOld, tOldOld};      // Returning gcd and bezout coefficients in struct.
     return results;
 }
 
+// Recursive form of the extended euclidean algorithm.
 int RecursiveEuclideanAlgorithm(int a, int b, int *s, int *t) {
+    // Base case.
     if (b == 0) {
         *s = 0;
         *t = 1;
@@ -60,7 +65,7 @@ int RecursiveEuclideanAlgorithm(int a, int b, int *s, int *t) {
     }
 
     int s1, t1 = 0;
-    int gcd = RecursiveEuclideanAlgorithm(b, a%b, &s1, &t1);
+    int gcd = RecursiveEuclideanAlgorithm(b, a%b, &s1, &t1);    // Recursive step
 
     int quotient = a/b;
     *s = t1 - quotient * s1;
