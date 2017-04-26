@@ -18,9 +18,7 @@ int main() {
 }
 
 int Euclidean(int a, int b) {
-    if(a == b) {
-        return a;
-    } else if(b == 0) {
+    if(b == 0) {
         return a;
     }
 

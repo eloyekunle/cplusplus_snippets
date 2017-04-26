@@ -5,6 +5,7 @@
 #include <iostream>
 
 using namespace std;
+// Struct to hold three variables returned by naiive extendedeuclidean
 struct ExtEuclid {
     int gcd;
     int bezout1;
@@ -12,7 +13,7 @@ struct ExtEuclid {
 };
 
 ExtEuclid ExtendedEuclideanAlgorithm(int a, int b);
-int RecursiveEuclideanAlgorithm(int a, int b);
+int RecursiveEuclideanAlgorithm(int a, int b, int *s, int *t);
 
 
 int main() {
@@ -21,6 +22,11 @@ int main() {
     cin >> num1 >> num2;
     ExtEuclid gcd = ExtendedEuclideanAlgorithm(num1, num2);
     cout << "The gcd of " << num1 << " and " << num2 << " is: " << gcd.gcd << " with bezout coefficients: " << gcd.bezout1 << " and " << gcd.bezout2 << endl;
+
+    cout << "Using extended euclidean algorithm" << endl;
+    int s, t;
+    int gcd2 = RecursiveEuclideanAlgorithm(num1, num2, &s, &t);
+    cout << "The gcd of " << num1 << " and " << num2 << " is: " << gcd2 << " with bezout coefficients: " << t << " and " << s << endl;
 }
 
 ExtEuclid ExtendedEuclideanAlgorithm(int a, int b) {
@@ -46,6 +52,19 @@ ExtEuclid ExtendedEuclideanAlgorithm(int a, int b) {
     return results;
 }
 
-int RecursiveEuclideanAlgorithm(int a, int b) {
+int RecursiveEuclideanAlgorithm(int a, int b, int *s, int *t) {
+    if (b == 0) {
+        *s = 0;
+        *t = 1;
+        return a;
+    }
 
+    int s1, t1 = 0;
+    int gcd = RecursiveEuclideanAlgorithm(b, a%b, &s1, &t1);
+
+    int quotient = a/b;
+    *s = t1 - quotient * s1;
+    *t = s1;
+
+    return gcd;
 }
