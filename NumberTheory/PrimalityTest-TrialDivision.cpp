@@ -21,7 +21,7 @@ bool trialDivision(int number) {
         return 0;
     }
     int squareRoot = (int) sqrt(number);
-    for(int i = 2; i <= squareRoot; i++) {
+    for(unsigned int i = 2; i <= squareRoot; i++) {
         if (number%i == 0) {
             return false;
         }
