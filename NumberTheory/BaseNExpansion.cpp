@@ -4,8 +4,7 @@
 //
 
 #include <iostream>
-
-std::string basenexpansion(int n, int b);
+#include "BaseNExpansion.h"
 
 int main() {
     int number, base;
