@@ -18,17 +18,17 @@ int main() {
 
 void PrimeFactorization(int number) {
     while (number % 2 == 0) {
-        cout << 2 << " ";
+        cout << 2 << endl;
         number = number / 2;
     }
     for (int i = 3; i <= sqrt(number); i = i + 2) {
         while (number % i == 0) {
-            cout << i << " ";
+            cout << i << endl;
             number = number / i;
         }
     }
 
     if (number > 2) {
-        cout << number;
+        cout << number << endl;
     }
 }
